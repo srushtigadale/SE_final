@@ -10,15 +10,15 @@ FILE_PATH = 'responses.xlsx'
 # Create an Excel file if it doesn't exist
 def create_excel_file():
     if not os.path.exists(FILE_PATH):
-        df = pd.DataFrame(columns=['Name', 'Email', 'Message'])
+        df = pd.DataFrame(columns=['Name', 'Email', 'MIS', 'Message'])
         df.to_excel(FILE_PATH, index=False)
 
 # Save the form data to the Excel file
-def save_to_excel(name, email, message):
+def save_to_excel(name, email, MIS, message):
     create_excel_file()  # Ensure the file exists
     wb = load_workbook(FILE_PATH)
     sheet = wb.active
-    sheet.append([name, email, message])
+    sheet.append([name, email, MIS, message])
     wb.save(FILE_PATH)
 
 # Home route (form page)
@@ -32,10 +32,11 @@ def submit():
     if request.method == 'POST':
         name = request.form['name']
         email = request.form['email']
+        MIS = requenst.form['MIS']
         message = request.form['message']
 
         # Save data to Excel
-        save_to_excel(name, email, message)
+        save_to_excel(name, email, MIS, message)
 
         return redirect('/')
 
