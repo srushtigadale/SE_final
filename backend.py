@@ -33,6 +33,9 @@ def submit():
         name = request.form['name']
         email = request.form['email']
         MIS = requenst.form['MIS']
+        if not (MIS.isdigit() and len(MIS) == 9):
+            flash("MIS must be a 9-digit number!")
+            return redirect('/')
         message = request.form['message']
 
         # Save data to Excel
